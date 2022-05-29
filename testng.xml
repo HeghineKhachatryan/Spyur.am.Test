@@ -11,7 +11,7 @@
                 <include name="func"/>
             </define>
             <run>
-                <include name="func"/>
+                <include name="all"/>
             </run>
         </groups>
         <classes>
