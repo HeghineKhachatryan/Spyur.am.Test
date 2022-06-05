@@ -4,15 +4,13 @@
     <test verbose="1" preserve-order="false" name="firefoxTest">
         <parameter name="driverName" value="firefox"/>
         <classes>
-            <class name="TestSpyurAM">
-            </class>
+            <class name="TestSpyurAM"/>
         </classes>
     </test>
     <test verbose="1" preserve-order="false" name="chromeTest">
         <parameter name="driverName" value="chrome"/>
         <classes>
-            <class name="TestSpyurAM">
-            </class>
+            <class name="TestSpyurAM"/>
         </classes>
     </test>
 </suite>

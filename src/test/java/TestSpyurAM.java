@@ -1,11 +1,12 @@
-import driverprovider.WebDriverProvider;
 import helperclasses.ActionHelper;
+import listeners.TestListeners;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.*;
 import pages.HomePage;
 import pages.SearchPage;
 
+@Listeners(TestListeners.class)
 public class TestSpyurAM extends BaseTest {
 
     private HomePage homePage;
@@ -22,7 +23,6 @@ public class TestSpyurAM extends BaseTest {
         homePage.get();
         homePage.doASearch("ալա");
         Assert.assertTrue(homePage.getCurrentURL().contains("search"));
-        System.out.println("searchSomething() method has completed successfully for " + WebDriverProvider.parameter);
     }
 
     @Test
@@ -30,8 +30,6 @@ public class TestSpyurAM extends BaseTest {
         homePage.get();
         homePage.doASearch("ալա");
         Assert.assertEquals(20, searchPage.getCurrentPageResultCount());
-        System.out.println("findCurrentPageResultsNumber() method has completed successfully for "
-                + WebDriverProvider.parameter);
     }
 
     @Test
@@ -48,7 +46,6 @@ public class TestSpyurAM extends BaseTest {
         WebElement elementByIndex = searchPage.getElementByIndex(6);
         Assert.assertTrue(elementByIndex.getText().contains("«ԴԻՄԱՐԿ» ԻՆՏԵՐՆԵՏ-ՄԱՐԿԵՏԻՆԳԱՅԻՆ ԸՆԿԵՐՈՒԹՅՈՒՆ"),
                 "Text should contain -> «ԴԻՄԱՐԿ» ԻՆՏԵՐՆԵՏ-ՄԱՐԿԵՏԻՆԳԱՅԻՆ ԸՆԿԵՐՈՒԹՅՈՒՆ");
-        System.out.println("testElementText() method has completed successfully for " + WebDriverProvider.parameter);
     }
 
     @Test
@@ -57,7 +54,6 @@ public class TestSpyurAM extends BaseTest {
         homePage.doASearch("ծրագրավորում");
         WebElement elementByIndex = searchPage.getElementByIndex(6);
         ActionHelper.scrollToMiddle(elementByIndex);
-        System.out.println("testScrolling() method has completed successfully for " + WebDriverProvider.parameter);
     }
 
     @Test
@@ -67,7 +63,6 @@ public class TestSpyurAM extends BaseTest {
         WebElement elementByIndex = searchPage.getElementByIndex(6);
         ActionHelper.scrollToMiddle(elementByIndex);
         ActionHelper.highlightElement(elementByIndex);
-        System.out.println("testHighlighting() method has completed successfully for " + WebDriverProvider.parameter);
     }
 
 }

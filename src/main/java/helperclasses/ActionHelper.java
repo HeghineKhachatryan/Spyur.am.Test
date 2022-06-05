@@ -1,10 +1,8 @@
 package helperclasses;
 
-import driverprovider.WebDriverProvider;
 import lombok.SneakyThrows;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
-import org.testng.annotations.Parameters;
 
 import java.io.File;
 import java.io.IOException;
@@ -23,6 +21,7 @@ public final class ActionHelper {
 
     public static void scrollToMiddle(WebElement element) {
         driver = WebDriverTypeChecker.checkDriverType();
+        System.out.println(driver.getTitle());
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("arguments[0].scrollIntoView({block: 'center'})", element);
     }
@@ -36,6 +35,7 @@ public final class ActionHelper {
     @SneakyThrows
     public static void highlightElement(WebElement element) {
         driver = WebDriverTypeChecker.checkDriverType();
+        System.out.println(driver.getTitle());
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("arguments[0].setAttribute('style', 'border-color: red; border-width: 3px;" +
                 " background-color: yellow;')", element);
@@ -45,6 +45,7 @@ public final class ActionHelper {
 
     public static void takeScreenshot() {
         driver = WebDriverTypeChecker.checkDriverType();
+        System.out.println(driver.getTitle());
         TakesScreenshot screenshot = (TakesScreenshot) driver;
         File output = screenshot.getScreenshotAs(OutputType.FILE);
         String pathToSaveFile = "src/screenshots/" + System.currentTimeMillis() + ".png";

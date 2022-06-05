@@ -16,11 +16,6 @@ public abstract class BasePage {
             PageFactory.initElements(driver, this);
     }
 
-//    @Parameters("driverName")
-//    private String getParam(@Optional("chrome") String driverName) {
-//        return driverName;
-//    }
-
     public String getURL() {
         return "https://www.spyur.am/";
     }
