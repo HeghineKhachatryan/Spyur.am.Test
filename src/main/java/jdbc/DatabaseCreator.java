@@ -1,8 +1,7 @@
 package jdbc;
 
-import core.JDBCDriverProvider;
+import driverprovider.JDBCDriverProvider;
 import lombok.SneakyThrows;
-import pages.SearchPage;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

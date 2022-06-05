@@ -1,6 +1,8 @@
 package pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.WindowType;
 import org.openqa.selenium.support.FindBy;
 
 public class HomePage extends BasePage {
@@ -12,7 +14,7 @@ public class HomePage extends BasePage {
     private WebElement location;
 
     @FindBy(xpath = "//button[@type='submit']")
-    private WebElement submit;
+    private volatile WebElement submit;
 
     @Override
     public String getURL() {
@@ -20,7 +22,7 @@ public class HomePage extends BasePage {
     }
 
     public void doASearch(String whatToSearch, String whereToSearch) {
-        this.location.sendKeys(whatToSearch);
+        this.location.sendKeys(whereToSearch);
         searchHelper(whatToSearch);
     }
 
@@ -28,7 +30,8 @@ public class HomePage extends BasePage {
         searchHelper(whatToSearch);
     }
 
-    private void searchHelper(String whatToSearch) {
+    private synchronized void searchHelper(String whatToSearch) {
+        this.whatToSearch.clear();
         this.whatToSearch.sendKeys(whatToSearch);
         this.submit.click();
     }

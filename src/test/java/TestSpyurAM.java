@@ -1,4 +1,5 @@
-import core.ActionHelper;
+import driverprovider.WebDriverProvider;
+import helperclasses.ActionHelper;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.*;
@@ -17,27 +18,56 @@ public class TestSpyurAM extends BaseTest {
     }
 
     @Test
-    public void testHomePage() {
+    public void searchSomething() {
         homePage.get();
         homePage.doASearch("ալա");
         Assert.assertTrue(homePage.getCurrentURL().contains("search"));
-        Assert.assertEquals(20, searchPage.getCurrentPageResultCount());
-        System.out.println(searchPage.getAllResultsFromAllPages());
+        System.out.println("searchSomething() method has completed successfully for " + WebDriverProvider.parameter);
     }
 
-    @Test(groups = "database")
+    @Test
+    public void findCurrentPageResultsNumber() {
+        homePage.get();
+        homePage.doASearch("ալա");
+        Assert.assertEquals(20, searchPage.getCurrentPageResultCount());
+        System.out.println("findCurrentPageResultsNumber() method has completed successfully for "
+                + WebDriverProvider.parameter);
+    }
+
+    @Test
     public void testAddingDataToDB() {
         homePage.get();
-        homePage.doASearch("ա");
+        homePage.doASearch("ծրագրավորում","Գյումրի");
         searchPage.collectDataFromPageAddToDB();
     }
 
-    @Test(groups = {"func"}, alwaysRun = true)
+    @Test
+    public void testElementText() {
+        homePage.get();
+        homePage.doASearch("ծրագրավորում");
+        WebElement elementByIndex = searchPage.getElementByIndex(6);
+        Assert.assertTrue(elementByIndex.getText().contains("«ԴԻՄԱՐԿ» ԻՆՏԵՐՆԵՏ-ՄԱՐԿԵՏԻՆԳԱՅԻՆ ԸՆԿԵՐՈՒԹՅՈՒՆ"),
+                "Text should contain -> «ԴԻՄԱՐԿ» ԻՆՏԵՐՆԵՏ-ՄԱՐԿԵՏԻՆԳԱՅԻՆ ԸՆԿԵՐՈՒԹՅՈՒՆ");
+        System.out.println("testElementText() method has completed successfully for " + WebDriverProvider.parameter);
+    }
+
+    @Test
     public void testScrolling() {
         homePage.get();
         homePage.doASearch("ծրագրավորում");
         WebElement elementByIndex = searchPage.getElementByIndex(6);
         ActionHelper.scrollToMiddle(elementByIndex);
-        ActionHelper.highlightElement(elementByIndex);
+        System.out.println("testScrolling() method has completed successfully for " + WebDriverProvider.parameter);
     }
+
+    @Test
+    public void testHighlighting() {
+        homePage.get();
+        homePage.doASearch("ծրագրավորում");
+        WebElement elementByIndex = searchPage.getElementByIndex(6);
+        ActionHelper.scrollToMiddle(elementByIndex);
+        ActionHelper.highlightElement(elementByIndex);
+        System.out.println("testHighlighting() method has completed successfully for " + WebDriverProvider.parameter);
+    }
+
 }

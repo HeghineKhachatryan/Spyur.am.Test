@@ -1,7 +1,6 @@
 package pages;
 
-import core.ActionHelper;
-import core.WaitHelper;
+import helperclasses.ActionHelper;
 import jdbc.DatabaseCreator;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;

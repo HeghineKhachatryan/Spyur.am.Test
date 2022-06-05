@@ -1,26 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="All Test Suite" allow-return-values="true">
-    <test verbose="2" preserve-order="true" name="/Users/heghine/workspace/school/JDBCSelenium/src">
-        <groups>
-            <define name="all">
-                <include name="func"/>
-                <include name="database"/>
-            </define>
-            <define name="func">
-                <include name="func"/>
-            </define>
-            <run>
-                <include name="all"/>
-            </run>
-        </groups>
+<suite name="All Test Suite" allow-return-values="true" parallel="tests" thread-count="2">
+    <test verbose="1" preserve-order="false" name="firefoxTest">
+        <parameter name="driverName" value="firefox"/>
         <classes>
             <class name="TestSpyurAM">
-                <methods>
-                    <include name="testScrolling">testScrolling</include>
-                </methods>
             </class>
         </classes>
-
+    </test>
+    <test verbose="1" preserve-order="false" name="chromeTest">
+        <parameter name="driverName" value="chrome"/>
+        <classes>
+            <class name="TestSpyurAM">
+            </class>
+        </classes>
     </test>
 </suite>
