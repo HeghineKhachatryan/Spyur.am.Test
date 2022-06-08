@@ -6,6 +6,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 
@@ -19,15 +21,9 @@ public class WebDriverProvider {
     private WebDriverProvider() {
     }
 
-    @Parameters("driverName")
-    public synchronized static String getParameter(@Optional("chrome") String driverName) {
-        parameter = driverName;
-        return driverName;
-    }
-
-    @Parameters("driverName")
     public static WebDriver getDriver(String driverName) {
-        if (getParameter(driverName).equalsIgnoreCase("chrome")) {
+            parameter = driverName;
+        if (driverName.equalsIgnoreCase("chrome")) {
             if (chromeDriver == null) {
                 synchronized (WebDriverProvider.class) {
                     if (chromeDriver == null) {
@@ -40,8 +36,8 @@ public class WebDriverProvider {
                 }
             }
             return chromeDriver;
-        } else if (getParameter(driverName).equalsIgnoreCase("firefox") ||
-                getParameter(driverName).equalsIgnoreCase("mozila")) {
+        } else if (driverName.equalsIgnoreCase("firefox") ||
+                driverName.equalsIgnoreCase("mozila")) {
             if (firefoxDriver == null) {
                 synchronized (WebDriverProvider.class) {
                     if (firefoxDriver == null) {
@@ -59,7 +55,6 @@ public class WebDriverProvider {
         }
     }
 
-    @Parameters("driverName")
     public static void quitDriver(String driverName) {
         if (driverName.equalsIgnoreCase("chrome")) {
             chromeDriver.quit();

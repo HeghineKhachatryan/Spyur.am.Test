@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="All Test Suite" allow-return-values="true" parallel="tests" thread-count="2">
-    <test verbose="1" preserve-order="false" name="firefoxTest">
+    <test verbose="1" name="firefoxTest">
         <parameter name="driverName" value="firefox"/>
         <classes>
             <class name="TestSpyurAM"/>
         </classes>
     </test>
-    <test verbose="1" preserve-order="false" name="chromeTest">
+    <test verbose="1" name="chromeTest">
         <parameter name="driverName" value="chrome"/>
         <classes>
             <class name="TestSpyurAM"/>
