@@ -1,40 +1,24 @@
 import driverprovider.WebDriverProvider;
-import helperclasses.WaitHelper;
-import lombok.SneakyThrows;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WindowType;
-import org.testng.annotations.*;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
 
 public class BaseTest {
+    WebDriver driver;
 
     @Parameters("driverName")
-    @BeforeMethod
-    public void setUpMethod(@Optional("chrome") String driverName) {
-        WebDriverProvider.getDriver(driverName);
+    @BeforeTest
+    public void setUpTest(@Optional("chrome") String driverName) {
+        WebDriverProvider webDriverProvider = new WebDriverProvider();
+        driver = webDriverProvider.getDriver(driverName);
     }
 
-    @Parameters("driverName")
-    @BeforeMethod()
-    public void openNewWindow(String driverName) {
-        if (driverName.equalsIgnoreCase("chrome")) {
-            openNewWindowForChrome();
-        } else if (driverName.equalsIgnoreCase("firefox")) {
-            openNewTabForFirefox();
-        }
-    }
-
-    private void openNewWindowForChrome() {
-        WebDriverProvider.getDriver("chrome").switchTo().newWindow(WindowType.WINDOW);
-    }
-
-    private void openNewTabForFirefox() {
-        WebDriverProvider.getDriver("firefox").switchTo().newWindow(WindowType.TAB);
-    }
-
-    @AfterMethod
+    @AfterTest
     @Parameters("driverName")
     public void tearDown(String driverName) throws InterruptedException {
         Thread.sleep(3000);
-        WebDriverProvider.quitDriver(driverName);
+        driver.quit();
     }
 }

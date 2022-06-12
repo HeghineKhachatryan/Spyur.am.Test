@@ -1,10 +1,7 @@
 package pages;
 
-import helperclasses.ActionHelper;
-import jdbc.DatabaseCreator;
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -24,43 +21,8 @@ public class SearchPage extends BasePage {
 
     private final By nextPage = By.xpath("//div[@class='paging']//li//a[@class='next_page']");
 
-    public int getCurrentPageResultCount() {
-        return searchingResultList.size();
-    }
 
-    public long getAllResultsFromAllPages() {
-        long count = 0L;
-        while (isElementPresent(nextPage)) {
-            count += getCurrentPageResultCount();
-            ActionHelper.navigateToNextPage(nextPageNavigator, nextPage);
-        }
-        count += getCurrentPageResultCount();
-        return count;
-    }
-
-    public void collectDataFromPageAddToDB() {
-        DatabaseCreator db = new DatabaseCreator();
-        while (isElementPresent(nextPage)) {
-            for (int j = 0; j < getCurrentPageResultCount(); j++) {
-                db.insertInto(elementText.get(j).getText(), searchingResultList.get(j).getAttribute("href"));
-            }
-            ActionHelper.navigateToNextPage(nextPageNavigator, nextPage);
-        }
-        for (int j = 0; j < getCurrentPageResultCount(); j++) {
-            db.insertInto(elementText.get(j).getText(), searchingResultList.get(j).getAttribute("href"));
-        }
-    }
-
-    public WebElement getElementByIndex(int index) {
-        return searchingResultList.get(index);
-    }
-
-    private boolean isElementPresent(By element) {
-        try {
-            driver.findElement(element);
-            return true;
-        } catch (NoSuchElementException | TimeoutException e) {
-            return false;
-        }
+    public SearchPage(WebDriver driver) {
+        super(driver);
     }
 }

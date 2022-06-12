@@ -1,8 +1,7 @@
 package pages;
 
-import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.WindowType;
 import org.openqa.selenium.support.FindBy;
 
 public class HomePage extends BasePage {
@@ -19,6 +18,11 @@ public class HomePage extends BasePage {
     @Override
     public String getURL() {
         return "https://www.spyur.am/am/home";
+    }
+
+
+    public HomePage(WebDriver driver) {
+        super(driver);
     }
 
     public void doASearch(String whatToSearch, String whereToSearch) {

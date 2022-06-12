@@ -1,19 +1,14 @@
 package pages;
 
-import driverprovider.WebDriverProvider;
-import helperclasses.WebDriverTypeChecker;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WindowType;
 import org.openqa.selenium.support.PageFactory;
-import org.testng.annotations.Optional;
-import org.testng.annotations.Parameters;
 
-public abstract class BasePage {
-    protected WebDriver driver;
+public class BasePage {
+    public WebDriver driver;
 
-    public BasePage() {
-            driver = WebDriverTypeChecker.checkDriverType();
-            PageFactory.initElements(driver, this);
+    public BasePage(WebDriver driver) {
+        this.driver = driver;
+        PageFactory.initElements(driver, this);
     }
 
     public String getURL() {
